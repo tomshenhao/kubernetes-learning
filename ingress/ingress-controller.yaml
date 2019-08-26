@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata: 
   name: ingress-controller
-  namespaces: ingress-space
+  namespace: ingress-space
 spec:
   replicas: 1
   selector: 
@@ -21,7 +21,7 @@ spec:
         - /nginx-ingress-controller
         - --configmap=$(POD_NAMESPACE)/nginx-configuration
         - --default-backend-service=app-space/default-http-backend
-        end:
+        env:
         - name: POD_NAME
           valueFrom:
             fieldRef:
